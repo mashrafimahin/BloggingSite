@@ -1,0 +1,129 @@
+.Container {
+  padding: 6% 6% 2%;
+  background-color: #ececec;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.Container > div {
+  padding: 20px;
+}
+
+.Container > div h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.Container > div:nth-child(1) h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: "Audiowide", sans-serif;
+  cursor: pointer;
+  background: #0c96cc;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 150, 204, 1) 0%,
+    rgba(55, 176, 105, 1) 100%
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 8px;
+}
+
+.Container > div p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.05rem;
+  color: #555;
+  padding: 2px 0;
+  line-height: 22px;
+}
+
+.Container > div:nth-last-child(1) {
+  grid-column: span 4;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.98rem;
+  color: #444;
+}
+
+.Container > div:nth-child(1) ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+  margin-top: 15px;
+}
+
+.Container > div:nth-child(1) ul li {
+  list-style: none;
+}
+
+.Container > div:nth-child(1) ul li a {
+  text-decoration: none;
+  color: #444;
+  font-size: 1.2rem;
+  transition: all 200ms ease-in-out;
+}
+
+.Container > div:nth-child(1) ul li a:hover {
+  color: #222;
+}
+
+.newsletter {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #aaa;
+}
+
+.newsletter input {
+  padding: 14px;
+  padding-left: 20px;
+  outline: none;
+  border: none;
+  width: 100%;
+  background: transparent;
+  font-size: 0.95rem;
+  color: #444;
+  font-family: "Roboto", sans-serif;
+}
+
+.newsletter button {
+  padding: 14px 16px;
+  font-size: 1.1rem;
+  border: none;
+  background-color: #0c96cc;
+  color: #fff;
+  cursor: pointer;
+  transition: all 80ms ease-in-out;
+}
+
+.newsletter button:active {
+  background-color: #0374a0;
+}
+
+/* responsive */
+@media screen and (max-width: 1100px) {
+  .Container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .Container > div:nth-last-child(1) {
+    grid-column: span 3;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .Container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0;
+  }
+
+  .Container > div:nth-last-child(1) {
+    grid-column: span 1;
+  }
+}

@@ -1,0 +1,94 @@
+h1,
+h2 {
+  font-family: "Poppins", sans-serif;
+}
+h3,
+p {
+  font-family: "Roboto", sans-serif;
+}
+
+.Container {
+  margin-top: 140px;
+  position: relative;
+  display: flex;
+}
+
+.Container > div {
+  padding: 30px;
+}
+
+.Container > div:nth-child(1) {
+  max-width: 76%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 14px;
+  row-gap: 60px;
+}
+
+.Container > div:nth-child(1) .ButtonSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: span 3;
+}
+
+.Container > div:nth-child(2) {
+  position: sticky;
+  top: 140px;
+  right: 0;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  height: calc(100dvh - 150px);
+}
+
+.Container > div:nth-last-child(1) .SubMenu {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+/* Responsive */
+@media screen and (max-width: 767px) {
+  .Container {
+    margin-top: 100px;
+    flex-direction: column;
+  }
+
+  .Container > div {
+    padding: 20px;
+  }
+
+  .Container > div:nth-child(1) {
+    max-width: 100%;
+  }
+
+  .Container > div:nth-child(2) {
+    position: static;
+    top: 0px;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .Container > div:nth-child(1) {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+  }
+
+  .Container > div:nth-child(1) .ButtonSection {
+    grid-column: span 2;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .Container > div:nth-child(1) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .Container > div:nth-child(1) .ButtonSection {
+    grid-column: span 1;
+  }
+}

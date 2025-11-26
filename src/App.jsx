@@ -1,0 +1,56 @@
+// hooks
+import { lazy, Suspense, useEffect, useState } from "react";
+// styles
+import GlobalStyle from "./Styles/Component/Global.Style";
+// router
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// components
+import Navbar from "./Components/Navbar";
+import Loader from "./Components/Loader";
+import Footer from "./Components/Footer";
+// loading effect
+// eslint-disable-next-line no-unused-vars
+const LazyLoad = (Component) => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <Component />
+    </Suspense>
+  );
+};
+// pages
+const Home = lazy(() => import("./Pages/Home"));
+
+// main
+function App() {
+  // states
+  const [isLoading, setLoading] = useState(true);
+
+  // window mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // check point for loader
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
+    <>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={LazyLoad(Home)} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
+  );
+}
+
+export default App;
