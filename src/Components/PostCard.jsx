@@ -1,4 +1,5 @@
 // style
+import React from "react";
 import {
   Box,
   MiniContainer,
@@ -9,26 +10,17 @@ import {
 } from "../Styles/Component/PostBox.Style";
 
 // main
-function PostCard() {
+const PostCard = React.memo(({ Obj }) => {
   return (
     <Box>
-      <Image
-        src={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s"
-        }
-        draggable={false}
-        onContextMenu={(e) => e.preventDefault()}
-      />
+      <Image src={Obj.image} loading="lazy" />
       <MiniContainer>
-        <Title>Hello</Title>
-        <Paragrapgh>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum,
-          odit.
-        </Paragrapgh>
-        <Time>1234</Time>
+        <Title>{Obj.title}</Title>
+        <Paragrapgh>{Obj.description.slice(0, 100) + "....."}</Paragrapgh>
+        <Time>Published: {Obj.date}</Time>
       </MiniContainer>
     </Box>
   );
-}
+});
 
 export default PostCard;

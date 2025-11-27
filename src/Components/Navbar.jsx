@@ -61,8 +61,12 @@ function Navbar() {
         setScrolled(false);
       }
     };
-    // enent listeners
+    // event listeners
     window.addEventListener("scroll", IsScrolled);
+    // cleanup
+    return () => {
+      window.removeEventListener("scroll", IsScrolled);
+    };
   }, []);
 
   return (

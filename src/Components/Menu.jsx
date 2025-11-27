@@ -19,7 +19,7 @@ function Menu({ title, listObj, ...rest }) {
       <Heading>{title}</Heading>
       <Order>
         {listObj.map((elm, i) => (
-          <NavLink style={common}>
+          <NavLink style={common} key={i}>
             <List key={i}>{elm}</List>
           </NavLink>
         ))}

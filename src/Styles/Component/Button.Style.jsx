@@ -7,11 +7,11 @@ const CommonButton = styled.button`
   background-color: #0c96cc;
   color: #fff;
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.05rem;
   letter-spacing: 0.5;
   cursor: pointer;
-  transition: all 200ms ease-in-out;
+  transition: all 100ms ease-in-out;
 
   &:hover {
     background-color: #1259b6;

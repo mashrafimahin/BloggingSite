@@ -32,7 +32,7 @@ export const Image = styled.img`
 `;
 
 export const Title = styled.h2`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: #444;
   font-weight: 600;
   font-family: "Poppins", sans-serif;

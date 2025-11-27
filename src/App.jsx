@@ -19,6 +19,7 @@ const LazyLoad = (Component) => {
 };
 // pages
 const Home = lazy(() => import("./Pages/Home"));
+const About = lazy(() => import("./Pages/About"));
 
 // main
 function App() {
@@ -29,9 +30,9 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 500);
 
-    return () => clearInterval(timer);
+    return () => clearTimeout(timer);
   }, []);
 
   // check point for loader
@@ -46,6 +47,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={LazyLoad(Home)} />
+          <Route path="/about" element={LazyLoad(About)} />
         </Routes>
         <Footer />
       </BrowserRouter>
