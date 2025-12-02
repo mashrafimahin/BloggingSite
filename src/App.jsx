@@ -20,6 +20,7 @@ const LazyLoad = (Component) => {
 // pages
 const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
+const Contact = lazy(() => import("./Pages/Contact"));
 
 // main
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Routes>
           <Route path="/" element={LazyLoad(Home)} />
           <Route path="/about" element={LazyLoad(About)} />
+          <Route path="/contact" element={LazyLoad(Contact)} />
         </Routes>
         <Footer />
       </BrowserRouter>

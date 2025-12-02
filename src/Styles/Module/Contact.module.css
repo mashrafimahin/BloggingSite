@@ -1,0 +1,87 @@
+h1 {
+  font-size: 2rem;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+p {
+  margin-top: 4px;
+  max-width: 60%;
+  font-size: 1.1rem;
+  color: #555;
+  font-family: "Roboto", sans-serif;
+  line-height: 26px;
+}
+
+.Container {
+  margin-top: 140px;
+  padding: 0 6%;
+  position: relative;
+}
+
+.Form {
+  padding: 4% 0;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.Form input,
+.Form textarea {
+  padding: 14px 20px;
+  border: 1px solid #aaa;
+  background-color: transparent;
+  color: #555;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+
+.Form input:focus,
+.Form textarea:focus {
+  border: 1px solid #0c96cc;
+}
+
+.Form textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.Form .flexBox {
+  display: flex;
+  gap: 20px;
+}
+
+.Container img {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* responsive */
+@media screen and (max-width: 1000px) {
+  .Container img {
+    display: none;
+  }
+
+  .Form {
+    max-width: 100%;
+  }
+
+  p {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .Form .flexBox {
+    flex-direction: column;
+  }
+}

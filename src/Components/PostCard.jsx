@@ -13,7 +13,7 @@ import {
 const PostCard = React.memo(({ Obj }) => {
   return (
     <Box>
-      <Image src={Obj.image} loading="lazy" />
+      {/* <Image src={Obj.image} loading="lazy" /> */}
       <MiniContainer>
         <Title>{Obj.title}</Title>
         <Paragrapgh>{Obj.description.slice(0, 100) + "....."}</Paragrapgh>

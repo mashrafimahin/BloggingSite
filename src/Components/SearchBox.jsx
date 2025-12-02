@@ -5,10 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // main
-function SearchBox() {
+function SearchBox({ currentValue, changeHandler, ...rest }) {
   return (
     <SearchStyle>
-      <Input type="text" placeholder="Search Contents ...." />
+      <Input
+        type="text"
+        placeholder="Search Contents ...."
+        value={currentValue}
+        onChange={(e) => changeHandler(e.target.value)}
+        {...rest}
+      />
       <I>
         <FontAwesomeIcon icon={faSearch} />
       </I>
