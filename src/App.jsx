@@ -4,6 +4,8 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import GlobalStyle from "./Styles/Component/Global.Style";
 // router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// contexts
+import PostContext from "./Contexts/PostContext";
 // components
 import Navbar from "./Components/Navbar";
 import Loader from "./Components/Loader";
@@ -21,11 +23,13 @@ const LazyLoad = (Component) => {
 const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
 const Contact = lazy(() => import("./Pages/Contact"));
+const Post = lazy(() => import("./Pages/Post"));
 
 // main
 function App() {
   // states
   const [isLoading, setLoading] = useState(true);
+  const [supplyObject, setSupplyObject] = useState(null);
 
   // window mount
   useEffect(() => {
@@ -46,11 +50,14 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={LazyLoad(Home)} />
-          <Route path="/about" element={LazyLoad(About)} />
-          <Route path="/contact" element={LazyLoad(Contact)} />
-        </Routes>
+        <PostContext.Provider value={{ supplyObject, setSupplyObject }}>
+          <Routes>
+            <Route path="/" element={LazyLoad(Home)} />
+            <Route path="/article:id" element={LazyLoad(Post)} />
+            <Route path="/about" element={LazyLoad(About)} />
+            <Route path="/contact" element={LazyLoad(Contact)} />
+          </Routes>
+        </PostContext.Provider>
         <Footer />
       </BrowserRouter>
     </>
