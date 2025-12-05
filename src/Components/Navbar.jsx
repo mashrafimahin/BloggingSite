@@ -91,13 +91,17 @@ function Navbar() {
             <NavLink to="contact" style={common}>
               <li onClick={handleLink}>Contact</li>
             </NavLink>
-            <NavLink to="authentication" style={common}>
+            <NavLink to="signup" style={common}>
               {size && <li onClick={handleLink}>Login/SignUp</li>}
             </NavLink>
           </ul>
         </nav>
         {/* action buttons  */}
-        {!size && <Button>Sign Up</Button>}
+        {!size && (
+          <NavLink to="signup">
+            <Button>Sign Up</Button>
+          </NavLink>
+        )}
         {size && (
           <Button onClick={handleHumb}>
             <FontAwesomeIcon icon={faBars} />

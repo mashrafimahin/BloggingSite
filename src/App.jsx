@@ -24,6 +24,7 @@ const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
 const Contact = lazy(() => import("./Pages/Contact"));
 const Post = lazy(() => import("./Pages/Post"));
+const SignUp = lazy(() => import("./Pages/SignUp"));
 
 // main
 function App() {
@@ -56,6 +57,7 @@ function App() {
             <Route path="/article/:id" element={LazyLoad(Post)} />
             <Route path="/about" element={LazyLoad(About)} />
             <Route path="/contact" element={LazyLoad(Contact)} />
+            <Route path="/signup" element={LazyLoad(SignUp)} />
           </Routes>
         </PostContext.Provider>
         <Footer />
