@@ -1,5 +1,5 @@
 // hooks
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 // context
 import PostContext from "../Contexts/PostContext";
 // styles
@@ -9,6 +9,11 @@ import classes from "../Styles/Module/Post.module.css";
 function Post() {
   // data
   const { supplyObject } = useContext(PostContext);
+
+  // window mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className={classes.Container}>

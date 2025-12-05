@@ -53,7 +53,7 @@ function App() {
         <PostContext.Provider value={{ supplyObject, setSupplyObject }}>
           <Routes>
             <Route path="/" element={LazyLoad(Home)} />
-            <Route path="/article:id" element={LazyLoad(Post)} />
+            <Route path="/article/:id" element={LazyLoad(Post)} />
             <Route path="/about" element={LazyLoad(About)} />
             <Route path="/contact" element={LazyLoad(Contact)} />
           </Routes>
