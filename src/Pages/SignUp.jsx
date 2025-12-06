@@ -128,7 +128,7 @@ function SignUp() {
       </Box>
       {/* external link */}
       <TagLine>
-        Already have an account? <NavLink to="/signin">Sign In</NavLink>
+        Already have an account? <NavLink to="/login">Sign In</NavLink>
       </TagLine>
     </Container>
   );
