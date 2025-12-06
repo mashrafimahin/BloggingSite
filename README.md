@@ -1,14 +1,11 @@
 # 📝 BlogWebsite
 
-[![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF.svg)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-19.2.1-blue.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.2.6-646CFF.svg)](https://vitejs.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-12.6.0-orange.svg)](https://firebase.google.com/)
 [![Styled Components](https://img.shields.io/badge/Styled_Components-6.1.19-DB7093.svg)](https://styled-components.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A modern, responsive blog platform built with React and powered by Firebase. Share your thoughts, connect with readers, and create an engaging blogging experience.
-
-![BlogWebsite Preview](./public/screenshot.png)
 
 ## ✨ Features
 
