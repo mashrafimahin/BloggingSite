@@ -10,6 +10,7 @@ import {
   Input,
   Selection,
   Option,
+  TagLine,
 } from "../Styles/Component/Form.Style";
 // country names
 const countries = [
@@ -22,6 +23,7 @@ const countries = [
 ];
 // components
 import Button from "../Components/Button";
+import { NavLink } from "react-router-dom";
 
 // main
 function SignUp() {
@@ -124,6 +126,10 @@ function SignUp() {
       <Box>
         <Button type="submit">SignUp</Button>
       </Box>
+      {/* external link */}
+      <TagLine>
+        Already have an account? <NavLink to="/signin">Sign In</NavLink>
+      </TagLine>
     </Container>
   );
 }

@@ -86,3 +86,11 @@ export const Option = styled.option`
   border: none;
   font-size: 0.9rem;
 `;
+
+export const TagLine = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-size: 1.06rem;
+  color: #444;
+  text-align: center;
+  min-width: 100%;
+`;
