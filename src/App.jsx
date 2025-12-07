@@ -26,6 +26,7 @@ const Contact = lazy(() => import("./Pages/Contact"));
 const Post = lazy(() => import("./Pages/Post"));
 const SignUp = lazy(() => import("./Pages/SignUp"));
 const Login = lazy(() => import("./Pages/Login"));
+const Profile = lazy(() => import("./Pages/Profile"));
 
 // main
 function App() {
@@ -54,12 +55,14 @@ function App() {
         <Navbar />
         <PostContext.Provider value={{ supplyObject, setSupplyObject }}>
           <Routes>
-            <Route path="/" element={LazyLoad(Home)} />
+            {/* <Route path="/" element={LazyLoad(Home)} /> */}
+            <Route path="/" element={LazyLoad(Profile)} />
             <Route path="/article/:id" element={LazyLoad(Post)} />
             <Route path="/about" element={LazyLoad(About)} />
             <Route path="/contact" element={LazyLoad(Contact)} />
             <Route path="/signup" element={LazyLoad(SignUp)} />
             <Route path="/login" element={LazyLoad(Login)} />
+            <Route path="/profile" element={LazyLoad(Profile)} />
           </Routes>
         </PostContext.Provider>
         <Footer />
