@@ -1,5 +1,5 @@
 // hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // styles
 import {
   Main,
@@ -43,6 +43,7 @@ const countries = [
 // main
 function Profile() {
   // state
+  const [size, setSize] = useState(false);
   const [show, setShow] = useState(false);
   const [newData, setNewData] = useState({
     firstName: "",
@@ -81,6 +82,32 @@ function Profile() {
   // handle update button
   const handleUpdate = () => {};
 
+  // window on mount
+  useEffect(() => {
+    // default
+    window.scrollTo(0, 0);
+  }, []);
+
+  // window effect
+  useEffect(() => {
+    // deafult function
+    const SizeCalc = () => {
+      if (window.innerWidth < 767) {
+        setSize(true);
+      } else {
+        setSize(false);
+      }
+    };
+
+    // event listeners
+    window.addEventListener("resize", SizeCalc);
+    // function run
+    SizeCalc();
+
+    // while unmount
+    return () => window.removeEventListener("resize", SizeCalc);
+  }, []);
+
   return (
     <Main>
       {/* Top view */}
@@ -88,7 +115,7 @@ function Profile() {
         {/* Top view  */}
         <Box $centerize={true}>
           <Image>MT</Image>
-          <Box $pattern={true}>
+          <Box $pattern={true} $responsive={true}>
             <Title>Mashrafi Mahin</Title>
             <SubTitle>mail@com</SubTitle>
           </Box>
@@ -97,7 +124,7 @@ function Profile() {
       {/* Personal Details  */}
       <Container>
         {/* Details Tab  */}
-        <Box $pattern={true}>
+        <Box $pattern={true} $responsive={true}>
           {/* Heading  */}
           <Box>
             <Title>Personal Details</Title>
@@ -193,27 +220,49 @@ function Profile() {
           </List>
           <Underline style={{ marginBottom: "20px" }} />
           {/* Action Buttons  */}
-          <Box $customWidth={true} $centerize={true} $justify={"center"}>
+          <Box
+            $customWidth={true}
+            $centerize={true}
+            $justify={"center"}
+            $responsive={true}
+          >
+            {/* Edit button */}
             {!show && (
-              <Button onClick={handleEdit} style={editBtn}>
+              <Button
+                onClick={handleEdit}
+                style={{ width: size ? "100%" : "auto", ...editBtn }}
+              >
                 <FontAwesomeIcon icon={faPen} />
                 &nbsp;Edit Details
               </Button>
             )}
+            {/* Cancel button  */}
             {show && (
-              <Button onClick={handleClose} style={cancelBtn}>
+              <Button
+                onClick={handleClose}
+                style={{ width: size ? "100%" : "auto", ...cancelBtn }}
+              >
                 Cancel Edit
               </Button>
             )}
-            {!show && <Button style={changeBtn}>Change Password</Button>}
+            {/* Change password */}
+            {!show && (
+              <Button style={{ width: size ? "100%" : "auto", ...changeBtn }}>
+                Change Password
+              </Button>
+            )}
+            {/* Update button  */}
             {show && (
               <Button onClick={handleUpdate} style={saveBtn}>
-                <FontAwesomeIcon icon={faCheck} />
+                <FontAwesomeIcon
+                  icon={{ width: size ? "100%" : "auto", ...faCheck }}
+                />
                 &nbsp;Update
               </Button>
             )}
+            {/* Log out button */}
             {!show && (
-              <Button style={cancelBtn}>
+              <Button style={{ width: size ? "100%" : "auto", ...cancelBtn }}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
                 &nbsp;Log Out
               </Button>
@@ -223,7 +272,7 @@ function Profile() {
       </Container>
       {/* Features  */}
       <Container>
-        <Box $justify={"space-around"} $centerize={true}>
+        <Box $justify={"space-around"} $centerize={true} $responsive={true}>
           <Button style={{ width: "100%" }}>
             <FontAwesomeIcon icon={faCircleHalfStroke} />
             &nbsp;Dark Mode

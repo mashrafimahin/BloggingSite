@@ -5,6 +5,14 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+
+  @media screen and (max-width: 767px) {
+    margin: 120px 10%;
+  }
+
+  @media screen and (max-width: 540px) {
+    margin: 120px 6%;
+  }
 `;
 
 export const Container = styled.div`
@@ -23,6 +31,12 @@ export const Box = styled.div`
   column-gap: 20px;
   /* border: 1px solid #222; */
   min-width: ${(props) => (props.$customWidth ? "100%" : "auto")};
+
+  @media screen and (max-width: 840px) {
+    flex-direction: ${(props) => (props.$responsive ? "column" : "row")};
+    row-gap: 20px;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Underline = styled.div`
@@ -51,6 +65,10 @@ export const Title = styled.h1`
   color: #333;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+
+  @media screen and (max-width: 540px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const SubTitle = styled.h3`
@@ -58,12 +76,20 @@ export const SubTitle = styled.h3`
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   min-width: ${(props) => (props.$listStyle ? "60%" : "auto")};
+
+  @media screen and (max-width: 540px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Text = styled.p`
   font-family: "Poppins", sans-serif;
   font-size: ${(props) => (props.$customSize ? "1.2rem" : "1rem")};
   color: #333;
+
+  @media screen and (max-width: 540px) {
+    font-size: 1.1rem;
+  }
 `;
 
 export const List = styled.div`
@@ -71,4 +97,8 @@ export const List = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+
+  @media screen and (max-width: 540px) {
+    padding: 10px;
+  }
 `;
