@@ -17,6 +17,16 @@ const editBtn = { background: "green", fontSize: "1rem" };
 const cancelBtn = { background: "red", fontSize: "1rem" };
 const saveBtn = { background: "darkcyan", fontSize: "1rem" };
 const changeBtn = { background: "orange", fontSize: "1rem" };
+// icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faCheckDouble,
+  faCircleHalfStroke,
+  faDownload,
+  faPen,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 // components
 import Button from "../Components/Button";
 // additional data
@@ -73,6 +83,7 @@ function Profile() {
 
   return (
     <Main>
+      {/* Top view */}
       <Container>
         {/* Top view  */}
         <Box $centerize={true}>
@@ -83,30 +94,13 @@ function Profile() {
           </Box>
         </Box>
       </Container>
+      {/* Personal Details  */}
       <Container>
         {/* Details Tab  */}
         <Box $pattern={true}>
           {/* Heading  */}
-          <Box $centerize={true} $justify={"space-between"} $customWidth={true}>
+          <Box>
             <Title>Personal Details</Title>
-            <Box>
-              {!show && (
-                <Button onClick={handleEdit} style={editBtn}>
-                  Edit Details
-                </Button>
-              )}
-              {show && (
-                <Button onClick={handleClose} style={cancelBtn}>
-                  Cancel Edit
-                </Button>
-              )}
-              {!show && <Button style={changeBtn}>Change Password</Button>}
-              {show && (
-                <Button onClick={handleUpdate} style={saveBtn}>
-                  Update
-                </Button>
-              )}
-            </Box>
           </Box>
           <Underline />
           {/* Details */}
@@ -181,6 +175,7 @@ function Profile() {
               <SubTitle $listStyle={true}>Country:</SubTitle>
               {show ? (
                 <Selection
+                  name="country"
                   value={newData.country}
                   onChange={handleChange}
                   style={{ minWidth: "100%", padding: "6px 10px" }}
@@ -196,6 +191,51 @@ function Profile() {
               )}
             </Box>
           </List>
+          <Underline style={{ marginBottom: "20px" }} />
+          {/* Action Buttons  */}
+          <Box $customWidth={true} $centerize={true} $justify={"center"}>
+            {!show && (
+              <Button onClick={handleEdit} style={editBtn}>
+                <FontAwesomeIcon icon={faPen} />
+                &nbsp;Edit Details
+              </Button>
+            )}
+            {show && (
+              <Button onClick={handleClose} style={cancelBtn}>
+                Cancel Edit
+              </Button>
+            )}
+            {!show && <Button style={changeBtn}>Change Password</Button>}
+            {show && (
+              <Button onClick={handleUpdate} style={saveBtn}>
+                <FontAwesomeIcon icon={faCheck} />
+                &nbsp;Update
+              </Button>
+            )}
+            {!show && (
+              <Button style={cancelBtn}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+                &nbsp;Log Out
+              </Button>
+            )}
+          </Box>
+        </Box>
+      </Container>
+      {/* Features  */}
+      <Container>
+        <Box $justify={"space-around"} $centerize={true}>
+          <Button style={{ width: "100%" }}>
+            <FontAwesomeIcon icon={faCircleHalfStroke} />
+            &nbsp;Dark Mode
+          </Button>
+          <Button style={{ width: "100%" }}>
+            <FontAwesomeIcon icon={faCheckDouble} />
+            &nbsp;Liscense & Agreements
+          </Button>
+          <Button style={{ width: "100%" }}>
+            <FontAwesomeIcon icon={faDownload} />
+            &nbsp;Download Profile Data
+          </Button>
         </Box>
       </Container>
     </Main>
