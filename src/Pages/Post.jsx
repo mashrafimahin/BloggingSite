@@ -29,7 +29,7 @@ function Post() {
         </div>
       </div>
       <div className={classes.box}>
-        <img src={supplyObject.image} />
+        <img src={supplyObject.image} draggable={false} />
       </div>
     </div>
   );

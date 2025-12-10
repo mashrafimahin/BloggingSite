@@ -1,5 +1,5 @@
 // hooks
-import { useEffect, useState } from "react";
+import { Activity, useEffect, useState } from "react";
 // styles
 import {
   Main,
@@ -226,8 +226,9 @@ function Profile() {
             $justify={"center"}
             $responsive={true}
           >
-            {/* Edit button */}
-            {!show && (
+            {/* Active buttons */}
+            <Activity mode={!show ? "visible" : "hidden"}>
+              {/* Edit button */}
               <Button
                 onClick={handleEdit}
                 style={{ width: size ? "100%" : "auto", ...editBtn }}
@@ -235,38 +236,33 @@ function Profile() {
                 <FontAwesomeIcon icon={faPen} />
                 &nbsp;Edit Details
               </Button>
-            )}
-            {/* Cancel button  */}
-            {show && (
+              {/* Change password button */}
+              <Button style={{ width: size ? "100%" : "auto", ...changeBtn }}>
+                Change Password
+              </Button>
+              {/* Log out button */}
+              <Button style={{ width: size ? "100%" : "auto", ...cancelBtn }}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+                &nbsp;Log Out
+              </Button>
+            </Activity>
+            {/* Active buttons */}
+            <Activity mode={show ? "visible" : "hidden"}>
+              {/* Cancel button  */}
               <Button
                 onClick={handleClose}
                 style={{ width: size ? "100%" : "auto", ...cancelBtn }}
               >
                 Cancel Edit
               </Button>
-            )}
-            {/* Change password */}
-            {!show && (
-              <Button style={{ width: size ? "100%" : "auto", ...changeBtn }}>
-                Change Password
-              </Button>
-            )}
-            {/* Update button  */}
-            {show && (
+              {/* Update button  */}
               <Button onClick={handleUpdate} style={saveBtn}>
                 <FontAwesomeIcon
                   icon={{ width: size ? "100%" : "auto", ...faCheck }}
                 />
                 &nbsp;Update
               </Button>
-            )}
-            {/* Log out button */}
-            {!show && (
-              <Button style={{ width: size ? "100%" : "auto", ...cancelBtn }}>
-                <FontAwesomeIcon icon={faRightFromBracket} />
-                &nbsp;Log Out
-              </Button>
-            )}
+            </Activity>
           </Box>
         </Box>
       </Container>
