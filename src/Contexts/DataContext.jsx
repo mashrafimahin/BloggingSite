@@ -1,5 +1,5 @@
 // hooks
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import app from "../Server/FireBase";
 import {
   getDatabase,
@@ -8,6 +8,7 @@ import {
   query,
   limitToLast,
 } from "firebase/database";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 // Context
 // eslint-disable-next-line react-refresh/only-export-components
@@ -23,6 +24,7 @@ function DataProvider(props) {
     app,
     "https://blogapp-4ea77-default-rtdb.asia-southeast1.firebasedatabase.app"
   );
+  const firestoreDb = getFirestore(app);
 
   // fetch data
   const FetchData = useCallback(async () => {
@@ -42,16 +44,34 @@ function DataProvider(props) {
     }
   }, [db]);
 
+  // create user data
+  const CreateUser = async (uid, userData) => {
+    try {
+      const userRef = doc(firestoreDb, "users", uid);
+      await setDoc(userRef, {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        password: userData.password,
+        phone: userData.phone,
+        country: userData.country,
+        dateOfBirth: userData.dateOfBirth,
+      });
+    } catch (e) {
+      console.log(e);
+      alert(
+        "Account created successfully but data is corrupted. Please go to profile and update your data."
+      );
+    }
+  };
+
   // Call FetchData once when provider mounts
   useEffect(() => {
     FetchData();
   }, [FetchData]);
 
-  // Memoize context value to prevent unnecessary re-renders
-  const contextValue = useMemo(() => ({ FetchData, data }), [FetchData, data]);
-
   return (
-    <DataContext.Provider value={contextValue}>
+    <DataContext.Provider value={{ data, CreateUser }}>
       {props.children}
     </DataContext.Provider>
   );
