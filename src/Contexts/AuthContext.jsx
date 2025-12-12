@@ -2,7 +2,10 @@
 import React, { useContext } from "react";
 import app from "../Server/FireBase";
 import { getAuth } from "firebase/auth";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 // import context
 import { DataContext } from "./DataContext";
@@ -31,8 +34,18 @@ function AuthProvider(props) {
     }
   };
 
+  // sign in
+  const SignIn = async (data) => {
+    try {
+      signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (e) {
+      alert("Something went wrong. Please try again later");
+      console.log(e);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ SignUp }}>
+    <AuthContext.Provider value={{ SignUp, SignIn }}>
       {props.children}
     </AuthContext.Provider>
   );
