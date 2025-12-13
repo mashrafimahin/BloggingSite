@@ -98,8 +98,8 @@ function Navbar() {
         </nav>
         {/* action buttons  */}
         {!size && (
-          <NavLink to="signup">
-            <Button>Sign Up</Button>
+          <NavLink to="login">
+            <Button>Sign In</Button>
           </NavLink>
         )}
         {size && (
