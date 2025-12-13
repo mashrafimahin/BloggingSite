@@ -1,5 +1,5 @@
 // hooks
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // styles
 import classes from "../Styles/Module/Navbar.module.css";
 const common = {
@@ -13,6 +13,8 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Button from "./Button";
 // router
 import { NavLink } from "react-router-dom";
+// context
+import { AuthContext } from "../Contexts/AuthContext";
 
 // main
 function Navbar() {
@@ -20,6 +22,9 @@ function Navbar() {
   const [size, setSize] = useState(false);
   const [humberger, setHumberger] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // context
+  const { userId } = useContext(AuthContext);
 
   // handle humberger
   const handleHumb = () => {
@@ -91,17 +96,29 @@ function Navbar() {
             <NavLink to="contact" style={common}>
               <li onClick={handleLink}>Contact</li>
             </NavLink>
-            <NavLink to="signup" style={common}>
-              {size && <li onClick={handleLink}>Login/SignUp</li>}
-            </NavLink>
+            {size &&
+              (!userId ? (
+                <NavLink to="login" style={common}>
+                  <li onClick={handleLink}>Login/SignUp</li>
+                </NavLink>
+              ) : (
+                <NavLink to="profile" style={common}>
+                  <li onClick={handleLink}>Profile</li>
+                </NavLink>
+              ))}
           </ul>
         </nav>
         {/* action buttons  */}
-        {!size && (
-          <NavLink to="login">
-            <Button>Sign In</Button>
-          </NavLink>
-        )}
+        {!size &&
+          (!userId ? (
+            <NavLink to="login">
+              <Button>Sign In</Button>
+            </NavLink>
+          ) : (
+            <NavLink to="profile">
+              <Button>Profile</Button>
+            </NavLink>
+          ))}
         {size && (
           <Button onClick={handleHumb}>
             <FontAwesomeIcon icon={faBars} />

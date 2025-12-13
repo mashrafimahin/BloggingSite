@@ -1,7 +1,7 @@
 // initializtions
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import app from "../Server/FireBase";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -16,8 +16,11 @@ export const AuthContext = React.createContext(null);
 
 // Context Wrapper
 function AuthProvider(props) {
+  // state
+  const [userId, setUserId] = useState(null);
+
   // context
-  const { CreateUser } = useContext(DataContext);
+  const { CreateUser, FetchUser } = useContext(DataContext);
 
   // instances
   const auth = getAuth(app);
@@ -44,8 +47,26 @@ function AuthProvider(props) {
     }
   };
 
+  // logout
+  const LogOut = () => {
+    signOut(auth);
+    setUserId(null);
+  };
+
+  // window mount and set usesr id
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) setUserId(user.uid);
+    });
+  }, [auth]);
+
+  // on window mount fetch user info
+  useEffect(() => {
+    FetchUser(userId);
+  }, [userId]);
+
   return (
-    <AuthContext.Provider value={{ SignUp, SignIn }}>
+    <AuthContext.Provider value={{ userId, SignUp, SignIn, LogOut }}>
       {props.children}
     </AuthContext.Provider>
   );

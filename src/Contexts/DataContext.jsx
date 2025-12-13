@@ -8,7 +8,13 @@ import {
   query,
   limitToLast,
 } from "firebase/database";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 // Context
 // eslint-disable-next-line react-refresh/only-export-components
@@ -18,6 +24,7 @@ export const DataContext = React.createContext(null);
 function DataProvider(props) {
   // state
   const [data, setData] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   // database
   const db = getDatabase(
@@ -65,13 +72,40 @@ function DataProvider(props) {
     }
   };
 
+  // fetch user data
+  const FetchUser = async (uid) => {
+    try {
+      const docRef = doc(firestoreDb, "users", uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserData(docSnap.data());
+      } else {
+        console.log("No document founds.");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // update user data
+  const UpdateUser = async (uid, data) => {
+    try {
+      const docRef = doc(firestoreDb, "users", uid);
+      await updateDoc(docRef, data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   // Call FetchData once when provider mounts
   useEffect(() => {
     FetchData();
   }, [FetchData]);
 
   return (
-    <DataContext.Provider value={{ data, CreateUser }}>
+    <DataContext.Provider
+      value={{ data, userData, CreateUser, FetchUser, UpdateUser }}
+    >
       {props.children}
     </DataContext.Provider>
   );

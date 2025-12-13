@@ -41,7 +41,7 @@ function Login() {
     // sign in
     SignIn(data);
     // navigate
-    navigate("/profile");
+    navigate("/");
   };
 
   // handleChange

@@ -1,5 +1,7 @@
 // hooks
-import { Activity, useEffect, useState } from "react";
+import { Activity, useContext, useEffect, useState } from "react";
+// router
+import { useNavigate } from "react-router-dom";
 // styles
 import {
   Main,
@@ -39,19 +41,42 @@ const countries = [
   { name: "Japan" },
   { name: "China" },
 ];
+// context
+import { DataContext } from "../Contexts/DataContext";
+import { AuthContext } from "../Contexts/AuthContext";
 
 // main
 function Profile() {
+  const navigate = useNavigate();
   // state
   const [size, setSize] = useState(false);
   const [show, setShow] = useState(false);
   const [newData, setNewData] = useState({
     firstName: "",
     lastName: "",
+    email: "",
     phone: "",
     country: "",
     dateOfBirth: "",
   });
+
+  // context
+  const { userId, LogOut } = useContext(AuthContext);
+  const { userData, UpdateUser } = useContext(DataContext);
+
+  // fetch data on mount
+  useEffect(() => {
+    if (userData) {
+      setNewData({
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        phone: userData.phone,
+        country: userData.country,
+        dateOfBirth: userData.dateOfBirth,
+      });
+    }
+  }, [userData]);
 
   // handle change
   const handleChange = (e) => {
@@ -80,7 +105,20 @@ function Profile() {
   };
 
   // handle update button
-  const handleUpdate = () => {};
+  const handleUpdate = () => {
+    UpdateUser(userId, newData)
+      // eslint-disable-next-line no-unused-vars
+      .then((x) => {
+        alert("Successfully updated");
+        setShow(false);
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch((x) => {
+        alert("Update failed. Please try again later.");
+        setShow(false);
+      });
+    // return to previous stage
+  };
 
   // window on mount
   useEffect(() => {
@@ -114,10 +152,17 @@ function Profile() {
       <Container>
         {/* Top view  */}
         <Box $centerize={true}>
-          <Image>MT</Image>
+          <Image>
+            {userData
+              ? `${newData.firstName.slice(0, 1)}${newData.lastName.slice(
+                  0,
+                  1
+                )}`
+              : "..."}
+          </Image>
           <Box $pattern={true} $responsive={true}>
-            <Title>Mashrafi Mahin</Title>
-            <SubTitle>mail@com</SubTitle>
+            <Title>{`${newData.firstName} ${newData.lastName}`}</Title>
+            <SubTitle>{newData.email}</SubTitle>
           </Box>
         </Box>
       </Container>
@@ -144,7 +189,7 @@ function Profile() {
                   style={{ minWidth: "100%", padding: "6px 20px" }}
                 />
               ) : (
-                <Text $customSize={true}>Mashafi</Text>
+                <Text $customSize={true}>{newData.firstName}</Text>
               )}
             </Box>
             {/* Last Name */}
@@ -159,13 +204,13 @@ function Profile() {
                   style={{ minWidth: "100%", padding: "6px 20px" }}
                 />
               ) : (
-                <Text $customSize={true}>Mashafi</Text>
+                <Text $customSize={true}>{newData.lastName}</Text>
               )}
             </Box>
             {/* Email Address */}
             <Box>
               <SubTitle $listStyle={true}>Email Address:</SubTitle>
-              <Text $customSize={true}>Mashafi</Text>
+              <Text $customSize={true}>{newData.email}</Text>
             </Box>
             {/* Phone */}
             <Box>
@@ -179,7 +224,7 @@ function Profile() {
                   style={{ minWidth: "100%", padding: "6px 20px" }}
                 />
               ) : (
-                <Text $customSize={true}>Mashafi</Text>
+                <Text $customSize={true}>{newData.phone}</Text>
               )}
             </Box>
             {/* Date of birth  */}
@@ -194,7 +239,7 @@ function Profile() {
                   style={{ minWidth: "100%", padding: "6px 20px" }}
                 />
               ) : (
-                <Text $customSize={true}>Mashafi</Text>
+                <Text $customSize={true}>{newData.dateOfBirth}</Text>
               )}
             </Box>
             {/* Country  */}
@@ -214,7 +259,7 @@ function Profile() {
                   ))}
                 </Selection>
               ) : (
-                <Text $customSize={true}>Mashafi</Text>
+                <Text $customSize={true}>{newData.country}</Text>
               )}
             </Box>
           </List>
@@ -241,7 +286,13 @@ function Profile() {
                 Change Password
               </Button>
               {/* Log out button */}
-              <Button style={{ width: size ? "100%" : "auto", ...cancelBtn }}>
+              <Button
+                onClick={() => {
+                  LogOut();
+                  navigate("/");
+                }}
+                style={{ width: size ? "100%" : "auto", ...cancelBtn }}
+              >
                 <FontAwesomeIcon icon={faRightFromBracket} />
                 &nbsp;Log Out
               </Button>

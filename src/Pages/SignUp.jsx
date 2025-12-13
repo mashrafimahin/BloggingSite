@@ -73,7 +73,7 @@ function SignUp() {
     }
     SignUp(data);
     setIsDisabled(true);
-    navigate("/profile");
+    navigate("/");
   };
 
   // handle visibility
